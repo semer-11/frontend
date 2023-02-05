@@ -18,7 +18,10 @@ def logout_User(request):
 
 
 def registerPage(request):
-    return render(request, 'base/login_register.html')
+    return render(request, 'Pages/register.html')
+
+def viewKebele(request):
+    return render(request,'Pages/viewKebele.html')
             
 def activate(request,uidb64,token):
     try:
