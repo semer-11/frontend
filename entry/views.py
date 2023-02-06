@@ -1,25 +1,39 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-
-
+from django.contrib.auth import login,authenticate,logout
+from django.contrib.auth.models import User
+from entry.forms import ResidentForm
+from django.contrib import messages
 def home(request):
     return render(request, 'index.html')
 
 
 def loginPage(request):
     if request.method == "POST":
-        return HttpResponse(request)
-    else:
+        username= request.POST['username']
+        password= request.POST['password']
+        try:
+            user=User.objects.get(username=username)
+        except:
+            print("Username doesn't exist")
+        if user is not None:
+            login(request,user)
+            return redirect('home')
+        else:
+            print("Username or password incorrect")
 
-        return render(request, 'Pages/login.html')
+    return render(request, 'Pages/login.html')
+
+
 
 
 def get_user_details(request):
     return HttpResponse("Please Login First")
 
 
-def logout_User(request):
-    return redirect('home')
+def logoutUser(request):
+    logout(request)
+    return redirect('login')
 
 
 def registerPage(request):
@@ -44,11 +58,16 @@ def addKebele(request):
 
 
 def addResident(request):
+    form=ResidentForm()
     if request.method == "POST":
-        return HttpResponse(request.POST['first_name'])
+        user = request.user
+        form = ResidentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Resident is added successfully!!")
+        return redirect('addResident')
     else:
-        return render(request, 'Pages/addResident.html')
-
+        return render(request, 'Pages/addResident.html',{'form':form})
 
 def updateUser(request):
     user = request.user
@@ -60,3 +79,5 @@ def updateUser(request):
             messages.success(request, "Your Account has been update ss!!")
             return redirect('user-profile', pk=user.id)
     return render(request, 'base/update-user.html', {'form': form})
+
+    

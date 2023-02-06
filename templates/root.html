@@ -105,22 +105,27 @@
               href="#"
               data-bs-toggle="dropdown"
             >
+            {%if  user.is_authenticated %}
               <img
                 src=" {% static 'assets/img/profile-img.jpg' %}"
                 alt="Profile"
                 class="rounded-circle"
               />
               <span class="d-none d-md-block dropdown-toggle ps-2"
-                >Sanoy</span
-              > </a
-            >
+                >{{ user.first_name }}</span
+                > </a
+                > {% else %}
+                <a href="/login" class="btn btn-primary">Login</a>
+                {% endif %}
 
+                
             <ul
               class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
             >
               <li class="dropdown-header">
-                <h6>Sanoy</h6>
+                <h6>{{ user.first_name }}</h6>
                 <span>System Admin</span>
+                
               </li>
               <li>
                 <hr class="dropdown-divider" />
@@ -158,10 +163,12 @@
               </li>
 
               <li>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                
+                <a class="dropdown-item d-flex align-items-center" href="/logout">
                   <i class="bi bi-box-arrow-right"></i>
-                  <span>Sign Out</span>
+                  <span>Sign Out </span>
                 </a>
+                
               </li>
             </ul>
            
@@ -171,9 +178,10 @@
       </nav>
      
     </header>
-   
+  
 
-    <aside id="sidebar" class="sidebar">
+    {% if user.is_authenticated %}
+    <aside id="sidebar" class="sidebar ">
       <ul class="sidebar-nav" id="sidebar-nav">
         
         <li class="nav-item">
@@ -255,6 +263,7 @@
        
       </ul>
     </aside>
+    {% endif %}
     <!-- End Sidebar-->
 
     <main id="main" class="main">
