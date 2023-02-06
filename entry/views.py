@@ -1,5 +1,17 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import cache_control
+from django.core.files.storage import FileSystemStorage #To upload Profile Picture
+from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from entry.models import User, Kebele
+
+from django.core import serializers
+import json
 
 
 def home(request):
@@ -27,8 +39,18 @@ def registerPage(request):
 
 
 def viewKebele(request):
-    return render(request, 'Pages/viewKebele.html')
+    kebeles = Kebele.objects.all()
+    context = {
+        "kebeles": kebeles
+    }
+    
+    return render(request, 'Pages/viewKebele.html' ,context)
+def dele(request,id):
+    kebele = Kebele.objects.get(id=id)
+    kebele.delete()
+    return redirect(viewKebele)
 
+    
 
 def userProfile(request, pk):
     return render(request, 'base/profile.html')
@@ -38,9 +60,20 @@ def userProfile(request, pk):
 
 def addKebele(request):
     if request.method == "POST":
-        return HttpResponse(request)
+        kebele = request.POST['kebelename']
+        location = request.POST['location']
+        try:
+            kebele_model = Kebele(kebele_name=kebele, location=location) 
+            kebele_model.save()
+            messages.success(request, "Kebele Added Successfully!")
+            return redirect('addKebele')
+        except:
+            messages.error(request, "Failed to Add Kebele!")
+            return redirect('addKebele')
     else:
         return render(request, 'Pages/addKebele.html')
+
+     
 
 
 def addResident(request):
