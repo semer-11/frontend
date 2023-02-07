@@ -1,0 +1,30 @@
+{%extends 'root.html'%}{% block title %}
+View Kebele
+{% endblock title %}
+{% block content %}
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">First</th>
+        <th scope="col">Last</th>
+        <th scope="col">Handle</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tbody>
+        {% for kebele in kebeles %}
+        <tr>
+        <td>{{kebele.id }}</td>
+        <td>{{ kebele.kebele_name }}</td>
+        <td> {{kebele.location}}
+        <td>{{ kebele.created_at }}</td>
+        <td>{{ kebele.updated_at }}</td>
+        
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  
+  
+{% endblock %}
