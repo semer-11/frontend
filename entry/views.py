@@ -69,8 +69,8 @@ def viewKebele(request):
    
 
 
-def userProfile(request, pk):
-    return render(request, 'base/profile.html')
+def userProfile(request):
+    return render(request, 'Pages/Profile.html')
 
 # @login_required(login_url='login')
 
