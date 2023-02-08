@@ -16,7 +16,7 @@
                   <h5 class="card-title text-center pb-0 fs-4">Add Staff</h5>
                 </div>
 
-                <form class="card-body row g-3 needs-validation" novalidate>
+                <form class="card-body row g-3 needs-validation" action={% url 'register' %} method="POST">
                   
                     {%  csrf_token %}
 {% comment %}            
@@ -145,7 +145,7 @@
                      {{ field }}
                     </div>
                      {% endfor %}
-
+{% comment %} 
 
                      {% for field in form_p %}
                      <div>
@@ -155,7 +155,7 @@
                       {{ field }}
                      </div>
                       {% endfor %}
- 
+  {% endcomment %}
 
                     <div class="col-12">
                       <button class="btn btn-primary w-100" type="submit">
