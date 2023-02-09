@@ -20,7 +20,7 @@ class ResidentForm(ModelForm):
        class Meta:
         model = Resident
         fields = '__all__'
-        exclude = ['']
+        exclude = ['death_date','cause_of_death','current_status''death_date','no_of_marriage','no_of_divorce']
        
        def __init__(self,*args,**kwargs):
               super(ResidentForm,self).__init__(*args,**kwargs)

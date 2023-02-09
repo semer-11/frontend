@@ -6,19 +6,19 @@ View Kebele
     <thead class="thead-dark">
       <tr>
         <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Location</th>
-        <th scope="col">Created At</th>
+        <th scope="col">first_name</th>
+        <th scope="col">last_name</th>
+        <th scope="col">Death_date</th>
       </tr>
     </thead>
     <tbody>
       <tbody>
-        {% for kebele in kebeles %}
+        {% for report in reports %}
         <tr>
-        <td>{{ kebele.id }}</td>
-        <td>{{ kebele.kebele_name }}</td>
-        <td> {{kebele.location}}</td>
-        <td>{{ kebele.created_at }}</td>
+        <td>{{ report.id }}</td>
+        <td>{{ report.first_name }}</td>
+        <td> {{report.last_name }}</td>
+        <td>{{ report.death_date }}</td>
         </tr>
         {% endfor %}
     </tbody>

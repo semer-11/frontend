@@ -59,7 +59,7 @@
       <div class="d-flex align-items-center justify-content-between">
         <a href="/" class="logo d-flex align-items-center">
           <img src="{% static 'assets/img/logo.png' %}" alt="" />
-          <span class="d-none d-lg-block">Jimma Zone CRVS</span>
+          <span class="d-none d-lg-block">Jimma Zone CRVS{{ user.profile.role }}</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
       </div>
@@ -181,9 +181,12 @@
   
 
     {% if user.is_authenticated %}
+     
     <aside id="sidebar" class="sidebar ">
       <ul class="sidebar-nav" id="sidebar-nav">
         
+      {% if user.profile.role == 0 %}
+    
         <li class="nav-item">
           <a class="nav-link" href="index.html">
             <i class='bx bxs-group' ></i>
@@ -201,9 +204,7 @@
           >
            
             <i class='bx bx-group'></i>
-            <span>Add Staff</span>
-            
-            
+            <span>Add Staff{{ user.profile.role}}</span> 
           </a>
    
         <li class="nav-item">
@@ -220,51 +221,84 @@
           <li class="nav-item">
             <a
               class="nav-link collapsed"
+              data-bs-target="#tables-nav"
+             
+              href="/addKebele"
+            >
+            <i class='bx bx-home-circle'></i></i><span>Add Kebele</span
+              >
+            </a>
+      
+    {% elif user.profile.role == 1 %} 
+          <li class="nav-item">
+            <a
+              class="nav-link collapsed"
               data-bs-target="#forms-nav"
              
               href="{% url 'viewBirthReport' %}"
             >
               <i class='bx bxs-building-house'></i>
-              <span>View Birth Report</span
+              <span>View Birth Report{{ user.profile.role}}</span
               >
             </a>
-        
+            <li class="nav-item">
+              <a
+                class="nav-link collapsed"
+                data-bs-target="#forms-nav"
+               
+                href="{% url 'viewDeathReport' %}"
+              >
+                <i class='bx bxs-building-house'></i>
+                <span>View Death Report</span
+                >
+              </a>
+              <li class="nav-item">
+                <a
+                  class="nav-link collapsed"
+                  data-bs-target="#forms-nav"
+                 
+                  href="{% url 'viewMarriageReport' %}"
+                >
+                  <i class='bx bxs-building-house'></i>
+                  <span>View Marriage Report</span
+                  >
+                </a>
+                <li class="nav-item">
+                  <a
+                    class="nav-link collapsed"
+                    data-bs-target="#forms-nav"
+                   
+                    href="{% url 'viewDivorceReport' %}"
+                  >
+                    <i class='bx bxs-building-house'></i>
+                    <span>View Divorce Report</span
+                    >
+                  </a>
+                  
 
-        <li class="nav-item">
-          <a
-            class="nav-link collapsed"
-            data-bs-target="#tables-nav"
-           
-            href="/addKebele"
-          >
-          <i class='bx bx-home-circle'></i></i><span>Add Kebele</span
-            >
-          </a>
-        
+                  <li class="nav-item">
+                    <a
+                      class="nav-link collapsed"
+                      data-bs-target="#charts-nav"
+                      
+                      href="/addResident"
+                    >
+                    <i class='bx bx-user-plus'></i><span>Add Resident</span
+                      >
+                    </a>
+              
 
-        <li class="nav-item">
-          <a
-            class="nav-link collapsed"
-            data-bs-target="#charts-nav"
-            
-            href="/addResident"
-          >
-          <i class='bx bx-user-plus'></i><span>Add Resident</span
-            >
-          </a>
-    
-
-        <li class="nav-item">
-          <a
-            class="nav-link collapsed"
-            data-bs-target="#icons-nav"
-            data-bs-toggle="collapse"
-            href="#"
-          >
-          <i class='bx bx-user'></i><span>Edit Resident</span
-            >
-          </a>
-     
+                  <li class="nav-item">
+                    <a
+                      class="nav-link collapsed"
+                      data-bs-target="#icons-nav"
+                      data-bs-toggle="collapse"
+                      href="#"
+                    >
+                    <i class='bx bx-user'></i><span>Edit Resident</span
+                      >
+                    </a> 
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link collapsed" href="pages-login.html">
             <i class='bx bx-log-out'></i>

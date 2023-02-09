@@ -41,14 +41,18 @@ class Profile(models.Model):
 
 GENDER = (
     ("Male","Male"),
-    ("Faleme","Famele"),
-    ("other","other"),
+    ("Female","Female"),
 )
 CHOICES = (
     ("single", "single"),
     ("married", "married"),
     ("divorced", "divorced"),
 )
+STATUS = (
+    ("alive", "alive"),
+    ("dead", "dead"),
+)
+
 
 class Resident(models.Model):
     Resident_id=models.AutoField(primary_key=True)
@@ -59,16 +63,16 @@ class Resident(models.Model):
     last_name = models.CharField(max_length=50,null=True)
     age = models.IntegerField(blank=True)
     gender = models.CharField(max_length=50,choices=GENDER)
-    birth_date = models.IntegerField(max_length=200,null=True)
+    birth_date = models.DateField(max_length=200,null=True)
     birth_place = models.CharField(max_length=200,null=True)
-    Death_date = models.DateField(max_length=200,null=True)
+    death_date = models.DateField(max_length=200,null=True)
     cause_of_death = models.CharField(max_length=200,null=True)
     phone = models.IntegerField(null=True)
     marital_status =models.BooleanField(max_length=20,choices=CHOICES,default="single")
-    current_status=models.BooleanField(null=True,blank=True,default="True")
+    current_status=models.BooleanField(null=True,choices=STATUS,blank=True,default="alive")
     profile_image=models.ImageField(null=True,blank=True,upload_to='residents/',default='profiles/user-default.png')
-    No_of_Divorse=models.IntegerField(default=0)
-    No_of_marrige=models.IntegerField(default=0)
+    no_of_divorce=models.IntegerField(default=0)
+    no_of_marriage=models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
    
@@ -101,7 +105,7 @@ class reported_death(models.Model):
     first_name = models.CharField(max_length=50,null=True)
     last_name = models.CharField(max_length=50,null=True)
     for_kebele = models.ForeignKey(Kebele,on_delete=models.CASCADE,max_length=50,null=True)
-    Death_date = models.DateField(max_length=200,null=True)
+    death_date = models.DateField(max_length=200,null=True)
     cause_of_death = models.CharField(max_length=50,null=True)
     created_at=models.DateTimeField(auto_now_add=True)
     death_proof=models.ImageField(null=True,blank=True,upload_to='proofs/')
