@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError
 
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.core import validators
@@ -120,6 +120,7 @@ def userProfile(request):
 
 def updateProfile(request):
     if request.method == "POST":
+
         try:
             if request.POST['email'] != "semer@gmail.com":
                 raise ValidationError(
@@ -244,3 +245,31 @@ def reportDivorce(request):
         return redirect('login')
     else:
         return render(request, 'Pages/report_divorce.html', context)
+
+
+def viewMarriageReports(request):
+    return render(request, "Pages/viewDeathReport.html")
+
+
+def viewBirthReports(request):
+    return render(request, "Pages/view_birth_report.html")
+
+
+def viewDeathReports(request):
+    return render(request, "Pages/view_death_report.html")
+
+
+def viewDivorceReports(request):
+    return render(request, "Pages/view_divorce_report.html")
+
+
+def viewDeathReport(request, report_id):
+    return render(request, "Pages/viewDeathReport.html", {"report": report_id})
+
+
+def viewMarriageReport(request, report_id):
+    return render(request, "Pages/viewMarriageReport.html", {"report": report_id})
+
+
+def viewBirthReport(request, report_id):
+    return render(request, "Pages/viewBirthReport.html", {"report": report_id})
