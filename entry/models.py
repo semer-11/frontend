@@ -56,34 +56,33 @@ STATUS = (
 
 class Resident(models.Model):
     Resident_id=models.AutoField(primary_key=True)
-    # Kebele_name=models.ForeignKey(kebele = models.ForeignKey(Kebele, null=True,on_delete = models.CASCADE))
-    #admin = models.OneToOneField(User, on_delete = models.CASCADE)
-    #approved_by=models.ForeignKey(User,blank=True)
-    first_name = models.CharField(max_length=50,null=True)
-    last_name = models.CharField(max_length=50,null=True)
-    age = models.IntegerField(blank=True)
+    kebele_name=models.ForeignKey(Kebele,on_delete=models.CASCADE,null=True,blank=True)
+    first_name = models.CharField(max_length=200,null=True)
+    last_name = models.CharField(max_length=200,null=True)
+    age = models.IntegerField(blank=True,null=True)
     gender = models.CharField(max_length=50,choices=GENDER)
-    birth_date = models.DateField(max_length=200,null=True)
+    birth_date = models.DateField(null=True)
     birth_place = models.CharField(max_length=200,null=True)
     death_date = models.DateField(max_length=200,null=True)
     cause_of_death = models.CharField(max_length=200,null=True)
     phone = models.IntegerField(null=True)
-    marital_status =models.BooleanField(max_length=20,choices=CHOICES,default="single")
-    current_status=models.BooleanField(null=True,choices=STATUS,blank=True,default="alive")
+    marital_status =models.CharField(max_length=200,choices=CHOICES,default="single")
+    current_status=models.CharField(max_length=200,null=True,choices=STATUS,blank=True,default="alive")
     profile_image=models.ImageField(null=True,blank=True,upload_to='residents/',default='profiles/user-default.png')
     no_of_divorce=models.IntegerField(default=0)
     no_of_marriage=models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
    
-    objects = models.Manager()
+    # objects = models.Manager()
 
-    class Meta:
-        verbose_name = _("Resident")
-        verbose_name_plural = _("Residents")
+    # class Meta:
+    #     verbose_name = _("Resident")
+    #     verbose_name_plural = _("Residents")
 
 
     def __str__(self):
+
         return self.first_name  
     
 class reported_birth(models.Model):

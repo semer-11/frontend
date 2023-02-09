@@ -162,7 +162,9 @@
                     <label for="yourName" class="form-label">{{ field.label }}</label>
                     {{ field }}
                   </div>
-                   
+                  {% if field.is_hidden %}
+                   {{field}}={{ user.profile.kebele }}
+                  {% endif %} 
                     {% endfor %}
                   <div class="col-12">
                     <button
