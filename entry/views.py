@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError
 
-from django.http import HttpResponse, HttpRequest
+from django.http import HttpResponse, JsonResponse
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.core import validators
@@ -276,3 +276,9 @@ def viewMarriageReport(request, report_id):
 
 def viewBirthReport(request, report_id):
     return render(request, "Pages/viewBirthReport.html", {"report": report_id})
+
+
+def getResult(request):
+    res = {"name": "Me", "age": 15}
+
+    return JsonResponse(res)

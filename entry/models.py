@@ -78,8 +78,8 @@ class Resident(models.Model):
     current_status = models.BooleanField(null=True, blank=True, default="True")
     profile_image = models.ImageField(
         null=True, blank=True, upload_to='residents/', default='profiles/user-default.png')
-    No_of_Divorse = models.IntegerField(default=0)
-    No_of_marrige = models.IntegerField(default=0)
+    # No_of_Divorse = models.IntegerField(default=0)
+    # No_of_marrige = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

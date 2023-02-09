@@ -13,17 +13,7 @@
               <a class="icon" href="#" data-bs-toggle="dropdown"
                 ><i class="bi bi-three-dots"></i
               ></a>
-              <ul
-                class="dropdown-menu dropdown-menu-end dropdown-menu-arrow"
-              >
-                <li class="dropdown-header text-start">
-                  <h6>Filter</h6>
-                </li>
-
-                <li><a class="dropdown-item" href="#">Today</a></li>
-                <li><a class="dropdown-item" href="#">This Month</a></li>
-                <li><a class="dropdown-item" href="#">This Year</a></li>
-              </ul>
+             
             </div>
 
             <div class="card-body">
@@ -99,7 +89,29 @@
        
 
             <div class="card-body">
-              <h5 class="card-title">Reports <span>/Today</span></h5>
+          
+            <input type="hidden" id="csrf" value="{{ csrf_token }}"/>
+              <h5 class="card-title">Reports <span>/Today</span>
+                <button class="btn btn-info py-1 px-2" onclick="toggleFilter()">Filter</button>
+              </h5>
+              <div id="buttons" class="d-none">
+              <input type="radio" class="btn-check" onchange="display('filter_by_kebele','filter_by_year')" name="show" id="success-outlined" autocomplete="off" checked>
+              <label class="btn btn-outline-info" for="success-outlined">Filter by Year</label>
+              
+              <input type="radio" class="btn-check" onchange="display('filter_by_year','filter_by_kebele')" name="show" id="danger-outlined" autocomplete="off">
+              <label class="btn btn-outline-info" for="danger-outlined">Filter by Kebele</label>
+              <div  >
+                <form class="d-flex flex-row my-2 d-none" onsubmit="filterKebele(event)" id="filter_by_kebele">
+                  <input type="text" placeholder="Kebele Name" class="form-control w-50 mx-2" name="kebele"/>
+                  <input type="submit" value="Filter" class="btn btn-primary">
+                </form>
+                <form class="d-flex my-1 flex-row d-none my-2" onsubmit="filterYear(event)" id="filter_by_year">
+                  <input type="text" placeholder="Start Year" class="form-control w-50 mx-2" name="start"/>
+                  <input type="text" placeholder="End Year" class="form-control w-50 mx-2" name="end"/>
+                  <input type="submit" value="Filter" class="btn btn-primary">
+                </form>
+              </div>
+              </div>
 
               <!-- Line Chart -->
               <div id="reportsChart"></div>
@@ -244,6 +256,25 @@
                   ],
                 });
             });
+            function toggleFilter(){
+            document.getElementById('buttons').classList.toggle('d-none');
+            }
+            async function filterYear(event){
+              event.preventDefault()
+              var res= await fetch('http://127.0.0.1:8000/getResult/')
+             
+  
+            }
+            function display(show,hide){
+              
+             var ele = document.getElementsByName('show');
+             for(i = 0; i < ele.length; i++) {
+                  if(ele[i].checked){
+              document.getElementById(show).classList.add('d-none')
+              document.getElementById(hide).classList.remove('d-none')
+            } 
+          }
+            }
           </script>
         </div>
       </div>
@@ -255,3 +286,5 @@
 
 
 {% endblock %}
+
+

@@ -32,7 +32,8 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('addKebele', views.addKebele, name="addKebele"),
     path('addResident', views.addResident, name="addResident"),
-    path('userProfile',views.userProfile,name="userProfile")
+    path('userProfile', views.userProfile, name="userProfile"),
+    path('getResult/', views.getResult, name="getResult")
     #   for Systemadmin
 
 
