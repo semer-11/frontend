@@ -50,8 +50,7 @@ class Profile(models.Model):
 
 GENDER = (
     ("Male", "Male"),
-    ("Faleme", "Famele"),
-    ("other", "other"),
+    ("Female", "Female"),
 )
 CHOICES = (
     ("single", "single"),
@@ -127,16 +126,21 @@ class reported_death(models.Model):
 
 class reported_marriages(models.Model):
     id = models.IntegerField(primary_key=True)
-    first_name_hus = models.CharField(max_length=50, null=True)
-    last_name_hus = models.CharField(max_length=50, null=True)
-    first_name_wife = models.CharField(max_length=50, null=True)
-    last_name_wife = models.CharField(max_length=50, null=True)
-    marriage_date = models.DateField(max_length=200, null=True)
+    first_name_hus = models.CharField(
+        verbose_name="Husband First Name", max_length=50, null=True)
+    last_name_hus = models.CharField(
+        verbose_name="Husband Last Name", max_length=50, null=True)
+    first_name_wife = models.CharField(
+        verbose_name="Wife First Name", max_length=50, null=True)
+    last_name_wife = models.CharField(
+        verbose_name="Wife Last Name", max_length=50, null=True)
+    marriage_date = models.DateTimeField(
+        verbose_name="Marriage Date", max_length=200, null=True)
     for_kebele = models.ForeignKey(
-        Kebele, on_delete=models.CASCADE, max_length=50, null=True)
+        Kebele, verbose_name="For Kebele", on_delete=models.CASCADE, max_length=50, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    marriage_proof = models.ImageField(
-        null=True, blank=True, upload_to='proofs/')
+    marriage_proof = models.ImageField(verbose_name="Marriage Proof Photo",
+                                       null=True, blank=True, upload_to='proofs/')
 
     def __str__(self):
         return self.first_name_hus+self.first_name_wife
@@ -144,16 +148,21 @@ class reported_marriages(models.Model):
 
 class reported_divorces(models.Model):
     id = models.IntegerField(primary_key=True)
-    first_name_hus = models.CharField(max_length=50, null=True)
-    last_name_hus = models.CharField(max_length=50, null=True)
-    first_name_wife = models.CharField(max_length=50, null=True)
-    last_name_wife = models.CharField(max_length=50, null=True)
+    first_name_hus = models.CharField(
+        verbose_name="Husband First Name", max_length=50, null=True)
+    last_name_hus = models.CharField(
+        verbose_name="Husband Last Name", max_length=50, null=True)
+    first_name_wife = models.CharField(
+        verbose_name="Wife First Name", max_length=50, null=True)
+    last_name_wife = models.CharField(
+        verbose_name="Wife Last Name", max_length=50, null=True)
     for_kebele = models.ForeignKey(
-        Kebele, on_delete=models.CASCADE, max_length=50, null=True)
-    divorce_date = models.DateField(max_length=200, null=True)
+        Kebele, verbose_name="For Kebele", on_delete=models.CASCADE, max_length=50, null=True)
+    divorce_date = models.DateField(
+        verbose_name="Divorce Date", max_length=200, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    divorce_proof = models.ImageField(
-        null=True, blank=True, upload_to='proofs/')
+    divorce_proof = models.ImageField(verbose_name="Divorce Proof",
+                                      null=True, blank=True, upload_to='proofs/')
 
     def __str__(self):
         return self.first_name_hus+self.first_name_wife

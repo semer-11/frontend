@@ -6,20 +6,26 @@ View Kebele
     <thead class="thead-dark">
       <tr>
         <th scope="col">Id</th>
-        <th scope="col">Name</th>
-        <th scope="col">Location</th>
-        <th scope="col">Created At</th>
+        <th scope="col">Husband Name</th>
+        <th scope="col">Wife Name</th>
+        <th scope="col">Marriage Date</th>
+        <th scope="col">Detail</th>
       </tr>
     </thead>
     <tbody>
       <tbody>
-        {% for kebele in kebeles %}
+        {% for i in count %}
+        {% for marriage in marriages %}
         <tr>
-        <td>{{ kebele.id }}</td>
-        <td>{{ kebele.kebele_name }}</td>
-        <td> {{kebele.location}}</td>
-        <td>{{ kebele.created_at }}</td>
+        <td>{{ marriage.id }}</td>
+        <td>{{ marriage.first_name_hus }} {{ marriage.last_name_hus }}</td>
+        <td> {{marriage.first_name_wife }} {{ marriage.last_name_wife }}</td>
+        <td>{{ marriage.marriage_date }}</td>
+        <td>
+          <a href="/mariage/detail/{{ marriage.id }}" class="btn rounded border">Details</a>
+          </td>
         </tr>
+        {% endfor %}
         {% endfor %}
     </tbody>
   </table>

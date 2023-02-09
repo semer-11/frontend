@@ -78,6 +78,7 @@ def viewKebele(request):
 
 def viewDeathReport(request):
     reports = reported_death.objects.all()
+
     context = {
         "reports": reports
     }
@@ -87,7 +88,6 @@ def viewDeathReport(request):
 
 def viewBirthReport(request):
     reports = reported_birth.objects.all()
-    print("Hello")
     context = {
         "reports": reports
     }
@@ -96,7 +96,7 @@ def viewBirthReport(request):
 
 
 def viewMarriageReport(request):
-    reports = reported_birth.objects.all()
+    reports = reported_marriages.objects.all()
     context = {
         "reports": reports
     }
@@ -159,12 +159,13 @@ def addKebele(request):
 def addResident(request):
     form = ResidentForm()
     if request.method == "POST":
-        user = request.user
+        #user = request.User
         form = ResidentForm(request.POST)
-        if form.is_valid():
+        try:
+            form.is_valid()
             form.save()
             messages.success(request, "Resident is added successfully!!")
-        else:
+        except:
             print("Isnt valid")
         return redirect('addResident')
     else:
@@ -248,11 +249,13 @@ def reportDivorce(request):
 
 
 def viewMarriageReports(request):
-    return render(request, "Pages/viewDeathReport.html")
+    marriages = reported_marriages.objects.all()
+    return render(request, "Pages/view_marriage_report.html", {"marriages": marriages, "count": range(5)})
 
 
 def viewBirthReports(request):
-    return render(request, "Pages/view_birth_report.html")
+    births = reported_birth.objects.all()
+    return render(request, "Pages/view_birth_report.html", {"births": births, "count": range(5)})
 
 
 def viewDeathReports(request):

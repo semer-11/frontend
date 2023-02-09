@@ -32,7 +32,7 @@ urlpatterns = [
     path('', views.home, name="home"),
     path('addKebele', views.addKebele, name="addKebele"),
     path('addResident', views.addResident, name="addResident"),
-
+    path('userProfile',views.userProfile,name="userProfile")
     #   for Systemadmin
 
 

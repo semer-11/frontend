@@ -8,7 +8,7 @@ View Birth
         <th scope="col">Id</th>
         <th scope="col">First Name</th>
         <th scope="col">Last Name</th>
-        <th scope="col">For Kebele</th>
+        <th scope="col">Kebele</th>
         <th scope="col">Birth Date</th>
         <th scope="col">Birth Place</th>
         <th scope="col">Gender</th>
@@ -16,17 +16,19 @@ View Birth
     </thead>
     <tbody>
       <tbody>
-        {% for report in reports %}
+        {% for i in count  %}
+        {% for birth in births %}
       
         <tr>
-        <td>{{ report.id }}</td>
-        <td>{{ report.first_name }}</td>
-        <td>{{ report.last_name }}</td>
-        <td>{{ report.for_kebele }}</td>
-        <td>{{ report.birth_date }}</td>
-        <td> {{report.birth_place}}</td>
-        <td> {{report.gender}}</td>
+        <td>B00{{ birth.id }}K{{i}}</td>
+        <td>{{ birth.first_name }} </td>
+        <td>{{ birth.last_name }}</td>
+        <td>{{ birth.for_kebele }}</td>
+        <td>{{ birth.birth_date }}</td>
+        <td> {{birth.birth_place}}</td>
+        <td> {{birth.gender}}</td>
         </tr>
+        {% endfor %}
         {% endfor %}
     </tbody>
   </table>
