@@ -8,10 +8,14 @@ from django.core import validators
 from django.contrib.auth.forms import UserCreationForm
 from entry.forms import ResidentForm, ProfileForm, CustomUserCreationForm, Reported_death_Form, Reported_birth_Form, Reported_marriage_Form, Reported_divorce_Form
 from django.contrib import messages
-from .models import Kebele, Profile, reported_birth, reported_death, reported_divorces, reported_marriages
+from .models import Kebele, Resident, Profile, reported_birth, reported_death, reported_divorces, reported_marriages
 
 
 def home(request):
+    no_of_people_zone = Resident.objects.all().count()
+    # no_of_people_kebele=Resident.objects.get(kebele_name=request.user.profile.kebele_name).count()
+    #print("no of people in kebele : ",no_of_people_kebele)
+    print(no_of_people_zone)
     return render(request, 'index.html')
 
 
@@ -159,13 +163,12 @@ def addKebele(request):
 def addResident(request):
     form = ResidentForm()
     if request.method == "POST":
-        #user = request.User
         form = ResidentForm(request.POST)
-        try:
-            form.is_valid()
+        if form.is_valid():
+
             form.save()
             messages.success(request, "Resident is added successfully!!")
-        except:
+        else:
             print("Isnt valid")
         return redirect('addResident')
     else:

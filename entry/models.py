@@ -68,18 +68,19 @@ class Resident(models.Model):
     last_name = models.CharField(max_length=50, null=True)
     age = models.IntegerField(blank=True)
     gender = models.CharField(max_length=50, choices=GENDER)
-    birth_date = models.IntegerField(max_length=200, null=True)
+    birth_date = models.DateField(max_length=200, null=True)
     birth_place = models.CharField(max_length=200, null=True)
     Death_date = models.DateField(max_length=200, null=True)
     cause_of_death = models.CharField(max_length=200, null=True)
     phone = models.IntegerField(null=True)
-    marital_status = models.BooleanField(
+    marital_status = models.CharField(
         max_length=20, choices=CHOICES, default="single")
-    current_status = models.BooleanField(null=True, blank=True, default="True")
+    current_status = models.CharField(
+        max_length=20, null=True, blank=True, default="alive")
     profile_image = models.ImageField(
         null=True, blank=True, upload_to='residents/', default='profiles/user-default.png')
-    # No_of_Divorse = models.IntegerField(default=0)
-    # No_of_marrige = models.IntegerField(default=0)
+    No_of_divorce = models.IntegerField(default=0)
+    No_of_marriage = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
