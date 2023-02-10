@@ -1,0 +1,30 @@
+{%extends 'root.html'%}{% block title %}
+View Staff
+{% endblock title %}
+{% block content %}
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">First_name</th>
+        <th scope="col">Last_name</th>
+        <th scope="col">kebele_name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tbody>
+        {% for staff in staffs %}
+        {% if staff.profile.role == 1 %}
+        <tr>
+        <td>{{ staff.id }}</td>
+        <td>{{ staff.first_name }}</td>
+        <td> {{ staff.last_name }}</td>
+        <td>{{ staff.profile.kebele_name }}</td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+  </table>
+  
+  
+{% endblock %}

@@ -22,7 +22,7 @@ class Kebele(models.Model):
         
 GENDER = (
     ("Male","Male"),
-    ("Faleme","Famele"),
+    ("Faleme","Female"),
     ("other","other"),
 )
 
@@ -56,20 +56,20 @@ STATUS = (
 
 class Resident(models.Model):
     Resident_id=models.AutoField(primary_key=True)
-    # Kebele_name=models.ForeignKey(kebele = models.ForeignKey(Kebele, null=True,on_delete = models.CASCADE))
+    kebele_name=models.ForeignKey(Kebele,on_delete=models.CASCADE,null=True)
     #admin = models.OneToOneField(User, on_delete = models.CASCADE)
     #approved_by=models.ForeignKey(User,blank=True)
     first_name = models.CharField(max_length=50,null=True)
     last_name = models.CharField(max_length=50,null=True)
-    age = models.IntegerField(blank=True)
+    age = models.IntegerField(null=True,blank=True)
     gender = models.CharField(max_length=50,choices=GENDER)
     birth_date = models.DateField(max_length=200,null=True)
     birth_place = models.CharField(max_length=200,null=True)
-    death_date = models.DateField(max_length=200,null=True)
-    cause_of_death = models.CharField(max_length=200,null=True)
+    death_date = models.DateField(max_length=200,null=True,blank=True)
+    cause_of_death = models.CharField(max_length=200,null=True,blank=True)
     phone = models.IntegerField(null=True)
-    marital_status =models.BooleanField(max_length=20,choices=CHOICES,default="single")
-    current_status=models.BooleanField(null=True,choices=STATUS,blank=True,default="alive")
+    marital_status =models.CharField(max_length=20,choices=CHOICES,default="single")
+    current_status=models.CharField(max_length=20,null=True,choices=STATUS,blank=True,default="alive")
     profile_image=models.ImageField(null=True,blank=True,upload_to='residents/',default='profiles/user-default.png')
     no_of_divorce=models.IntegerField(default=0)
     no_of_marriage=models.IntegerField(default=0)
@@ -95,7 +95,8 @@ class reported_birth(models.Model):
     birth_place = models.CharField(max_length=200,null=True)
     created_at=models.DateTimeField(auto_now_add=True)
     gender = models.CharField(max_length=50,choices=GENDER)
-    birth_proof=models.ImageField(null=True,blank=True,upload_to='proofs/')
+    is_visible=models.BooleanField(default=True)
+    birth_proof=models.ImageField(null=True,blank=True,upload_to='proofs/',default='profiles/user-default.png')
 
     def __str__(self):
         return self.first_name
@@ -108,7 +109,7 @@ class reported_death(models.Model):
     death_date = models.DateField(max_length=200,null=True)
     cause_of_death = models.CharField(max_length=50,null=True)
     created_at=models.DateTimeField(auto_now_add=True)
-    death_proof=models.ImageField(null=True,blank=True,upload_to='proofs/')
+    death_proof=models.ImageField(null=True,blank=True,upload_to='proofs/',default='profiles/user-default.png')
 
     def __str__(self):
         return self.first_name
@@ -122,7 +123,7 @@ class reported_marriages(models.Model):
     marriage_date= models.DateField(max_length=200,null=True)
     for_kebele = models.ForeignKey(Kebele,on_delete=models.CASCADE,max_length=50,null=True)
     created_at=models.DateTimeField(auto_now_add=True)
-    marriage_proof=models.ImageField(null=True,blank=True,upload_to='proofs/')
+    marriage_proof=models.ImageField(null=True,blank=True,upload_to='proofs/',default='profiles/user-default.png')
 
     def __str__(self):
         return self.first_name_hus+self.first_name_wife
@@ -136,7 +137,8 @@ class reported_divorces(models.Model):
     for_kebele = models.ForeignKey(Kebele,on_delete=models.CASCADE,max_length=50,null=True)
     divorce_date= models.DateField(max_length=200,null=True)
     created_at=models.DateTimeField(auto_now_add=True)
-    divorce_proof=models.ImageField(null=True,blank=True,upload_to='proofs/')
+    divorce_proof=models.ImageField(null=True,blank=True,upload_to='proofs/',default='profiles/user-default.png')
+    #visibility=models.IntegerField(null=True,blank=True,default="1")
 
     def __str__(self):
         return self.first_name_hus+self.first_name_wife

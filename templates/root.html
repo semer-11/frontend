@@ -188,7 +188,7 @@
       {% if user.profile.role == 0 %}
     
         <li class="nav-item">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="{% url 'viewStaff' %}">
             <i class='bx bxs-group' ></i>
             <span>View Staff</span>
           </a>
@@ -204,7 +204,7 @@
           >
            
             <i class='bx bx-group'></i>
-            <span>Add Staff{{ user.profile.role}}</span> 
+            <span>Add Staff</span> 
           </a>
    
         <li class="nav-item">
@@ -235,10 +235,10 @@
               class="nav-link collapsed"
               data-bs-target="#forms-nav"
              
-              href="{% url 'viewBirthReport' %}"
+              href="{% url 'viewBirthReports' %}"
             >
               <i class='bx bxs-building-house'></i>
-              <span>View Birth Report{{ user.profile.role}}</span
+              <span>View Birth Report</span
               >
             </a>
             <li class="nav-item">
@@ -246,7 +246,7 @@
                 class="nav-link collapsed"
                 data-bs-target="#forms-nav"
                
-                href="{% url 'viewDeathReport' %}"
+                href="{% url 'viewDeathReports' %}"
               >
                 <i class='bx bxs-building-house'></i>
                 <span>View Death Report</span
@@ -257,7 +257,7 @@
                   class="nav-link collapsed"
                   data-bs-target="#forms-nav"
                  
-                  href="{% url 'viewMarriageReport' %}"
+                  href="{% url 'viewMarriageReports' %}"
                 >
                   <i class='bx bxs-building-house'></i>
                   <span>View Marriage Report</span
@@ -268,7 +268,7 @@
                     class="nav-link collapsed"
                     data-bs-target="#forms-nav"
                    
-                    href="{% url 'viewDivorceReport' %}"
+                    href="{% url 'viewDivorceReports' %}"
                   >
                     <i class='bx bxs-building-house'></i>
                     <span>View Divorce Report</span

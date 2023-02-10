@@ -5,8 +5,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from entry.forms import ResidentForm,ProfileForm,CustomUserCreationForm,Reported_death_Form,Reported_birth_Form,Reported_marriage_Form,Reported_divorce_Form
 from django.contrib import messages
-from .models import Kebele,Profile,reported_birth,reported_death,reported_divorces,reported_marriages
-
+from .models import Kebele,Resident,Profile,reported_birth,reported_death,reported_divorces,reported_marriages
+from django.db import models
 
 def home(request):
     return render(request, 'index.html')
@@ -72,41 +72,125 @@ def viewKebele(request):
     }
     
     return render(request, 'Pages/viewKebele.html' ,context)
-   
-def viewDeathReport(request):
+def viewStaff(request):
+    staffs = User.objects.all()
+    context = {
+        "staffs": staffs
+    }
+    
+    return render(request, 'Pages/viewStaff.html' ,context)
+
+
+def viewDeathReports(request):
     reports = reported_death.objects.all()
     
     context = {
         "reports": reports
     }
     
-    return render(request, 'Pages/view_death_report.html' ,context)
+    return render(request, 'Pages/view_death_reports.html' ,context)
+
+def viewDeathReport(request,pk):
+    data = reported_death.objects.get(id=pk)
    
-def viewBirthReport(request):
+    
+    return render(request, 'Pages/view_death_report.html' ,context={'data':data})
+
+
+def viewBirthReports(request):
     reports = reported_birth.objects.all()
     context = {
         "reports": reports
     }
     
-    return render(request, 'Pages/view_birth_report.html' ,context)
+    return render(request, 'Pages/view_birth_reports.html' ,context)
 
+def viewBirthReport(request,pk):
+    data = reported_birth.objects.get(id=pk)
+   
+    
+    return render(request, 'Pages/view_birth_report.html' ,context={'data':data})
 
-def viewMarriageReport(request):
+def viewMarriageReports(request):
     reports = reported_marriages.objects.all()
     context = {
         "reports": reports
     }
+
+    return render(request, 'Pages/view_marriage_reports.html' ,context)
+
+def viewMarriageReport(request,pk):
+    data = reported_marriages.objects.get(id=pk)
+   
     
-    return render(request, 'Pages/view_marriage_report.html' ,context)
+    return render(request, 'Pages/view_marriage_report.html' ,context={'data':data})
+
+def validateDeathReport(request,pk):
+    record=reported_death.objects.get(id=pk)
+    resident=Resident.objects.get(first_name=record.first_name,last_name=record.last_name)
+    resident.current_status="dead"
+    resident.save()
+
+    return redirect('viewDeathReports')
+
+def validateBirthReport(request,pk):
+    
+    record=reported_birth.objects.get(id=pk)
+    check=Resident.objects.get(first_name=record.first_name,last_name=record.last_name)
+    record=reported_birth.objects.get(id=pk)
+    if check.first_name != record.first_name: 
+        resident=Resident.objects.create(
+        first_name=record.first_name,
+        last_name=record.last_name,
+        birth_date=record.birth_date,
+        birth_place=record.birth_place,
+        kebele_name=record.for_kebele,
+        gender=record.gender,
+        )
+        resident.save()
+        record.is_visible=False
+        record.save()
+    else:
+        print("dedeb")
+            
+    return redirect('viewBirthReports')
+
+def validateMarriageReport(request,pk):
+    record=reported_marriages.objects.get(id=pk)
+    resident_h=Resident.objects.get(first_name=record.first_name_hus,last_name=record.last_name_hus)
+    resident_h.marital_status="married"
+    resident_h.save()
+    resident_w=Resident.objects.get(first_name=record.first_name_wife,last_name=record.last_name_wife)
+    resident_w.marital_status="married"
+    resident_w.save()
+    
+    return redirect('viewMarriageReports')
+
+def validateDivorceReport(request,pk):
+    record=reported_divorces.objects.get(id=pk)
+    resident_h=Resident.objects.get(first_name=record.first_name_hus,last_name=record.last_name_hus)
+    resident_h.marital_status="divorced"
+    resident_h.save()
+    resident_w=Resident.objects.get(first_name=record.first_name_wife,last_name=record.last_name_wife)
+    resident_w.marital_status="divorced"
+    resident_w.save()
+    
+    return redirect('viewDivorceReports')
 
 
-def viewDivorceReport(request):
+def viewDivorceReports(request):
     reports = reported_divorces.objects.all()
     context = {
         "reports": reports
     }
     
-    return render(request, 'Pages/view_divorce_report.html' ,context)
+    return render(request, 'Pages/view_divorce_reports.html' ,context)
+
+def viewDivorceReport(request,pk):
+    data = reported_divorces.objects.get(id=pk)
+   
+    
+    return render(request, 'Pages/view_divorce_report.html' ,context={'data':data})
 
 def userProfile(request):
     return render(request, 'Pages/Profile.html')
@@ -162,7 +246,7 @@ def reportDeath(request):
     context={'form':form}
     if request.method == "POST":
         user = request.user
-        form = Reported_death_Form(request.POST)
+        form = Reported_death_Form(request.POST,request.FILES)
         if form.is_valid():
             form.save()
             messages.success(request, "Resident is added successfully!!")
@@ -177,8 +261,9 @@ def reportBirth(request):
     context={'form':form}
     if request.method == "POST":
         user = request.user
-        form = Reported_birth_Form(request.POST)
+        form = Reported_birth_Form(request.POST,request.FILES)
         if form.is_valid():
+            
             form.save()
             messages.success(request, "Resident is added successfully!!")
         else:

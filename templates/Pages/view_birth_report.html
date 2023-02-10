@@ -1,35 +1,44 @@
-{%extends 'root.html'%}{% block title %}
-View Birth
-{% endblock title %}
+
+{% extends 'root.html' %}
+{% load static %}
 {% block content %}
-<table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">first_name</th>
-        <th scope="col">last_name</th>
-        <th scope="col">for_kebele</th>
-        <th scope="col">birth_date</th>
-        <th scope="col">birth_place</th>
-        <th scope="col">gender</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tbody>
-        {% for report in reports %}
-      
-        <tr>
-        <td>{{ report.id }}</td>
-        <td>{{ report.first_name }}</td>
-        <td>{{ report.last_name }}</td>
-        <td>{{ report.for_kebele }}</td>
-        <td>{{ report.birth_date }}</td>
-        <td> {{report.birth_place}}</td>
-        <td> {{report.gender}}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-  </table>
+<div class="d-flex flex-row mb-4">
+    <div class="w-50">
+
+        <img src=" {% static '/img/birth.jpg' %} " class="w-75"/>
+    </div>
+    <div class="w-50 d-flex flex-column">
+        <div class="d-flex flex-column">
+            <lable>Full Name</label>
+            <h3>{{ data.first_name }} {{ data.last_name }}<h3>
+        </div>
+        {% comment %} <div class="d-flex flex-column">
+            <lable>Mother Name</label>
+            <h3>Zewditu Alemayehu<h3>
+        </div> {% endcomment %}
+        <div class="d-flex flex-column">
+            <lable>Kebele</label>
+            <h3>{{ data.kebele_name }}<h3>
+        </div>
+        <div class="d-flex flex-column">
+            <lable>Place Of Birth</label>
+            <h3>{{ data.birth_place }}<h3>
+        </div>
+        <div class="d-flex flex-column">
+            <lable>Reported By</label>
+            <h3>Yoans Mekonen<h3>
+        </div>
+        <div class="d-flex flex-column">
+            <lable>Report Date</label>
+            <h3>{{ data.created_at }}<h3>
+        </div>
+        <div class="d-flex flex-column">
+            
+            <a href="{% url 'validateBirthReport' data.id %}" class="btn btn-info">Approve</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+     
   
-  
-{% endblock %}

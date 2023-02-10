@@ -3,26 +3,9 @@ View Kebele
 {% endblock title %}
 {% block content %}
 <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Husband_name</th>
-        <th scope="col">Wife_name</th>
-        <th scope="col">Divorce_date</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tbody>
-        {% for report in reports %}
-        <tr>
-        <td>{{ report.id }}</td>
-        <td>{{ report.first_name_hus }}</td>
-        <td> {{ report.first_name_wife}}</td>
-        <td>{{ report.divorce_date }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-  </table>
-  
+
+    <form action="{% url 'validateDivorceReport' data.id %}">
+     <input type="submit" value="Validate">
+    </form>    
   
 {% endblock %}

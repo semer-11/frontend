@@ -1,0 +1,33 @@
+{%extends 'root.html'%}{% block title %}
+View Kebele
+{% endblock title %}
+{% block content %}
+<table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">first_name</th>
+        <th scope="col">last_name</th>
+        <th scope="col">Death_date</th>
+        <th scope="col">Check</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tbody>
+        {% for report in reports %}
+        <tr>
+        <td>{{ report.id }}</td>
+        <td>{{ report.first_name }}</td>
+        <td> {{report.last_name }}</td>
+        <td>{{ report.death_date }}</td>
+        <td>
+        <a href="view_death_report/{{report.id}}">
+          Check</a>
+        </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+  
+  
+{% endblock %}

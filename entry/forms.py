@@ -18,9 +18,9 @@ class CustomUserCreationForm(UserCreationForm):
 
 class ResidentForm(ModelForm):
        class Meta:
-        model = Resident
-        fields = '__all__'
-        exclude = ['death_date','cause_of_death','current_status''death_date','no_of_marriage','no_of_divorce']
+              model = Resident
+              fields = '__all__'
+              exclude = ['death_date','cause_of_death','current_status''death_date','no_of_marriage','no_of_divorce']
        
        def __init__(self,*args,**kwargs):
               super(ResidentForm,self).__init__(*args,**kwargs)
@@ -41,9 +41,9 @@ class ProfileForm(ModelForm):
 
 class Reported_death_Form(ModelForm):
        class Meta:
-        model = reported_death
-        fields = '__all__'
-        exclude = ['id']
+              model = reported_death
+              fields = '__all__'
+              exclude = ['id']
        
        def __init__(self,*args,**kwargs):
               super(Reported_death_Form,self).__init__(*args,**kwargs)
@@ -52,9 +52,9 @@ class Reported_death_Form(ModelForm):
 
 class Reported_birth_Form(ModelForm):
        class Meta:
-        model = reported_birth
-        fields = '__all__'
-        exclude = ['id']
+              model = reported_birth
+              fields = '__all__'
+              exclude = ['id']
        
        def __init__(self,*args,**kwargs):
               super(Reported_birth_Form,self).__init__(*args,**kwargs)
@@ -63,9 +63,9 @@ class Reported_birth_Form(ModelForm):
 
 class Reported_marriage_Form(ModelForm):
        class Meta:
-        model = reported_marriages
-        fields = '__all__'
-        exclude = ['id']
+              model = reported_marriages
+              fields = '__all__'
+              exclude = ['id']
        
        def __init__(self,*args,**kwargs):
               super(Reported_marriage_Form,self).__init__(*args,**kwargs)
@@ -74,9 +74,9 @@ class Reported_marriage_Form(ModelForm):
 
 class Reported_divorce_Form(ModelForm):
        class Meta:
-        model = reported_divorces
-        fields = '__all__'
-        exclude = ['id']
+              model = reported_divorces
+              fields = '__all__'
+              exclude = ['id']
        
        def __init__(self,*args,**kwargs):
               super(Reported_divorce_Form,self).__init__(*args,**kwargs)
