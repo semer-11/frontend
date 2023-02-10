@@ -1,10 +1,10 @@
 {%extends 'root.html'%}{% block title %}
 View Kebele
+{% load static %}
 {% endblock title %}
 {% block content %}
-<table class="table">
-  {{ data.first_name_hus }}
-  <img src="">
+   <img src=" {% static 'img/' %}{{ data.marriage_proof }} " class="w-75"/>
+   
   <form action="{% url 'validateMarriageReport' data.id %}">
       <input type="submit" value="Validate">
      </form>    
