@@ -3,10 +3,41 @@ View Kebele
 {% endblock title %}
 {% block content %}
 <table class="table">
+<<<<<<< HEAD
   {{ data.first_name_hus }}
   <img src="">
   <form action="{% url 'validateMarriageReport' data.id %}">
       <input type="submit" value="Validate">
      </form>    
    
+=======
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">Husband Name</th>
+        <th scope="col">Wife Name</th>
+        <th scope="col">Marriage Date</th>
+        <th scope="col">Detail</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tbody>
+        {% for i in count %}
+        {% for marriage in marriages %}
+        <tr>
+        <td>{{ marriage.id }}</td>
+        <td>{{ marriage.first_name_hus }} {{ marriage.last_name_hus }}</td>
+        <td> {{marriage.first_name_wife }} {{ marriage.last_name_wife }}</td>
+        <td>{{ marriage.marriage_date }}</td>
+        <td>
+          <a href="/mariage/detail/{{ marriage.id }}" class="btn rounded border">Details</a>
+          </td>
+        </tr>
+        {% endfor %}
+        {% endfor %}
+    </tbody>
+  </table>
+  
+  
+>>>>>>> b670981f7f6a92537b6336db974d017d16e88864
 {% endblock %}

@@ -11,7 +11,7 @@ urlpatterns = [
     path('report_divorce', views.reportDivorce, name="reportDivorce"),
 
     path('logout', views.logoutUser, name="logout"),
-    path('register', views.registerPage, name="register"),
+    path('register/', views.registerPage, name="register"),
     path('viewKebele/', views.viewKebele, name="viewKebele"),
     path('viewStaff/', views.viewStaff, name="viewStaff"),
     path('view_death_reports',views.viewDeathReports,name="viewDeathReports"),
@@ -24,14 +24,27 @@ urlpatterns = [
     path('view_divorce_report/<str:pk>',views.viewDivorceReport,name="viewDivorceReport"),
     path('validate_divorce_report/<str:pk>',views.validateDivorceReport,name="validateDivorceReport"),
     path('validate_birth_report/<str:pk>',views.validateBirthReport,name="validateBirthReport"),
+    path('viewDeathReports', views.viewDeathReports, name="viewDeathReports"),
+    path('viewBirthReports', views.viewBirthReports, name="viewBirthReports"),
+    path('viewMarriageReports', views.viewMarriageReports,
+         name="viewMarriageReports"),
+    path('view_divorce_report', views.viewDivorceReport, name="viewDivorceReport"),
     path('login', views.loginPage, name="login"),
 
-    path('profile/<str:pk>', views.userProfile, name="user-profile"),
+    path('viewDeathReport/<str:report_id>',
+         views.viewDeathReport, name="viewDeathReport"),
+    path('viewMarriageReport/<str:report_id>',
+         views.viewMarriageReport, name="viewMarriageReport"),
+    path('viewBirthReport/<str:report_id>',
+         views.viewBirthReport, name="viewBirthReport"),
+    path('profile', views.userProfile, name="profile"),
+    path('updateProfile', views.updateProfile, name="updateProfile"),
     path('update-user', views.updateUser, name="update-user"),
     path('', views.home, name="home"),
     path('addKebele', views.addKebele, name="addKebele"),
     path('addResident', views.addResident, name="addResident"),
-    path('userProfile',views.userProfile,name="userProfile")
+    path('userProfile', views.userProfile, name="userProfile"),
+    path('getResult/', views.getResult, name="getResult")
     #   for Systemadmin
 
 

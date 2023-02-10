@@ -16,6 +16,18 @@ class CustomUserCreationForm(UserCreationForm):
               for name,fields in self.fields.items():
                      fields.widget.attrs.update({'class':'form-control '})
 
+# class ResidentForm(ModelForm):
+       
+#        class Meta:
+#               model = Resident
+#               fields = '__all__'
+#               exclude = ['kebele_name','death_date','cause_of_death','current_status','no_of_marriage','no_of_divorce']
+       
+#        def __init__(self,*args,**kwargs):
+#               super(ResidentForm,self).__init__(*args,**kwargs)
+#               for name,fields in self.fields.items():
+#                      fields.widget.attrs.update({'class':'form-control '})
+
 class ResidentForm(ModelForm):
        class Meta:
               model = Resident
@@ -34,7 +46,6 @@ class ProfileForm(ModelForm):
               exclude = ['user']
 
        def __init__(self,*args,**kwargs):
-              
               super(ProfileForm,self).__init__(*args,**kwargs)
               for name,fields in self.fields.items():
                      fields.widget.attrs.update({'class':'form-control '})
