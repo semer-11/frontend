@@ -2,7 +2,6 @@
 {% extends 'root.html' %}
 {% load static %}
 {% block content %}
-<<<<<<< HEAD
 <div class="d-flex flex-row mb-4">
     <div class="w-50">
 
@@ -42,36 +41,4 @@
 {% endblock content %}
 
      
-=======
-<table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Kebele</th>
-        <th scope="col">Birth Date</th>
-        <th scope="col">Birth Place</th>
-        <th scope="col">Gender</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tbody>
-        {% for i in count  %}
-        {% for birth in births %}
-      
-        <tr>
-        <td>B00{{ birth.id }}K{{i}}</td>
-        <td>{{ birth.first_name }} </td>
-        <td>{{ birth.last_name }}</td>
-        <td>{{ birth.for_kebele }}</td>
-        <td>{{ birth.birth_date }}</td>
-        <td> {{birth.birth_place}}</td>
-        <td> {{birth.gender}}</td>
-        </tr>
-        {% endfor %}
-        {% endfor %}
-    </tbody>
-  </table>
->>>>>>> b670981f7f6a92537b6336db974d017d16e88864
   
