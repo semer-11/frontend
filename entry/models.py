@@ -57,6 +57,11 @@ CHOICES = (
     ("married", "married"),
     ("divorced", "divorced"),
 )
+STATUS = (
+    ("Alive", "Alive"),
+    ("Dead", "Dead"),
+    
+)
 
 
 class Resident(models.Model):
